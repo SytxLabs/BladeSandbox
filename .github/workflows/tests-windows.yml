@@ -1,0 +1,31 @@
+name: Run tests on Windows
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tests-windows:
+    name: Laravel 13 / Livewire 4 / PHP 8.4 / Windows
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: dom, mbstring, pdo_sqlite, sqlite3, tokenizer, gd, exif, zip, fileinfo
+          coverage: none
+      - name: Select Laravel 13 / Livewire 4
+        run: |
+          composer require --no-update --no-interaction "illuminate/contracts:^13.0" "illuminate/filesystem:^13.0" "illuminate/support:^13.0" "illuminate/view:^13.0"
+          composer require --dev --no-update --no-interaction "orchestra/testbench:^11.0" "livewire/livewire:^4.0"
+      - name: Install dependencies
+        run: composer update --prefer-dist --no-interaction --no-progress
+      - name: Run tests
+        run: vendor/bin/phpunit

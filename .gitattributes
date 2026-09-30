@@ -1,0 +1,15 @@
+# Normalize line endings: templates and expected test output must use LF on every platform
+# (Git for Windows defaults to core.autocrlf=true and would otherwise check out CRLF).
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.gif binary
+*.webp binary
+*.ico binary
+
+/.github export-ignore
+/tests export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/phpunit.xml export-ignore
+/phpstan.neon.dist export-ignore

@@ -1,0 +1,26 @@
+name: Compiler fuzzing
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  fuzz:
+    name: Compiler fuzzing (3000 templates per seed)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: dom, mbstring, pdo_sqlite, sqlite3, tokenizer, gd, exif, zip, fileinfo
+          coverage: none
+      - name: Install dependencies
+        run: composer update --prefer-dist --no-interaction --no-progress
+      - name: Run fuzzer
+        run: vendor/bin/phpunit --filter FuzzTest
+        env:
+          BLADE_SANDBOX_FUZZ_ITERATIONS: 3000

@@ -1,0 +1,14 @@
+parameters:
+    level: 6
+    paths:
+        - src
+    treatPhpDocTypesAsCertain: false
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        # Livewire is an optional dependency; its helper functions only exist when it is installed.
+        - '#Function Livewire\\(before|on) not found#'
+        - identifier: missingType.iterableValue
+        # Public test helper for applications; not used inside the package itself.
+        -
+            identifier: trait.unused
+            path: src/Testing/InteractsWithBladeSandbox.php

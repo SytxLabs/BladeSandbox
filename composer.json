@@ -1,0 +1,85 @@
+{
+    "name": "sytxlabs/blade-sandbox",
+    "description": "A default-deny security sandbox for rendering untrusted Laravel Blade templates, views, components, DTOs and Livewire views.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "blade",
+        "sandbox",
+        "security",
+        "templates",
+        "livewire",
+        "dto"
+    ],
+    "authors": [
+        {
+            "name": "SytxLabs"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "ext-ctype": "*",
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "ext-tokenizer": "*",
+        "illuminate/contracts": "^10.0|^11.0|^12.0|^13.0",
+        "illuminate/filesystem": "^10.0|^11.0|^12.0|^13.0",
+        "illuminate/support": "^10.0|^11.0|^12.0|^13.0",
+        "illuminate/view": "^10.0|^11.0|^12.0|^13.0",
+        "nikic/php-parser": "^5.0"
+    },
+    "require-dev": {
+        "livewire/livewire": "^3.5|^4.0",
+        "orchestra/testbench": "^8.0|^9.0|^10.0|^11.0",
+        "phpstan/phpstan": "^2.0",
+        "phpunit/phpunit": "^10.5|^11.0|^12.0",
+        "portavice/laravel-pint-config": "^3.0",
+        "sytxlabs/filesanitizer": "^1.2"
+    },
+    "suggest": {
+        "livewire/livewire": "Required for sandboxed Livewire views and the Livewire request guard (^3.5|^4.0).",
+        "sytxlabs/filesanitizer": "Output sanitizer for rendered pages (Sandbox::sanitizeWith('filesanitizer')).",
+        "illuminate/database": "Required for the EloquentTemplateLoader (templates stored in the database)",
+        "illuminate/cache": "Required for cacheOutput() (rendered output cache)",
+        "illuminate/events": "Dispatches the sandbox events (TemplateRendered, SecurityViolationDetected, ...)",
+        "league/commonmark": "Required for @markdown (safe Markdown rendering)",
+        "symfony/process": "Required for isolated rendering (Sandbox::isolated()); installed with laravel/framework",
+        "illuminate/queue": "Required for queued rendering (Sandbox::queueRender()); installed with laravel/framework"
+    },
+    "autoload": {
+        "psr-4": {
+            "SytxLabs\\BladeSandbox\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SytxLabs\\BladeSandbox\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SytxLabs\\BladeSandbox\\BladeSandboxServiceProvider"
+            ],
+            "aliases": {
+                "BladeSandbox": "SytxLabs\\BladeSandbox\\Facades\\BladeSandbox"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": "phpunit",
+        "analyse": "phpstan analyse --memory-limit=1G",
+        "cs": "pint --test",
+        "csfix": "pint --config ./pint.json",
+        "fuzz": [
+            "@putenv BLADE_SANDBOX_FUZZ_ITERATIONS=5000",
+            "phpunit --filter FuzzTest"
+        ]
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

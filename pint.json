@@ -1,0 +1,14 @@
+{
+    "extend": "vendor/portavice/laravel-pint-config/pint.json",
+    "notPath": [
+        "tests/Fixtures/App/DTO/BaseDTO.php"
+    ],
+    "exclude": [
+        "tests/Fixtures/views"
+    ],
+    "rules": {
+      "single_line_comment_spacing": false,
+      "single_line_empty_body": false,
+      "not_operator_with_successor_space": false
+    }
+}

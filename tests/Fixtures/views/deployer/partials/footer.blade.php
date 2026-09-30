@@ -1,0 +1,1 @@
+<footer>{{ $deployment->getLabel() }}</footer>
