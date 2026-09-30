@@ -14,9 +14,13 @@
     ],
     "authors": [
         {
-            "name": "SytxLabs"
+            "name": "Shaun Lüdeke",
+            "email": "info@sytxlabs.eu",
+            "homepage": "https://sytxlabs.eu",
+            "role": "Developer"
         }
     ],
+    "homepage": "https://sytxlabs.eu",
     "require": {
         "php": "^8.2",
         "ext-ctype": "*",
